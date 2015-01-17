@@ -17,6 +17,14 @@
 
 @implementation CardGameViewController
 
+- (Deck *)playingCardDeck
+{
+    if (!_playingCardDeck) {
+        _playingCardDeck = [[PlayingCardDeck alloc] init];
+    }
+    return _playingCardDeck;
+}
+
 - (void)setFlipCount:(int)flipCount {
     _flipCount = flipCount;
     self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
