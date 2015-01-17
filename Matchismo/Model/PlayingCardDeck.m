@@ -16,7 +16,6 @@
     self = [super init];
     
     if (self) {
-        NSLog(@"After if self");
         for (NSString *suit in [PlayingCard validSuits]) {
             for (NSUInteger rank = 1; rank <= [PlayingCard maxRank]; rank += 1) {
                 PlayingCard *card = [[PlayingCard alloc] init];
