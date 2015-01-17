@@ -8,6 +8,7 @@
 
 #import "CardGameViewController.h"
 #import "PlayingCardDeck.h"
+#import "PlayingCard.h"
 
 @interface CardGameViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
@@ -33,19 +34,25 @@
 
 - (IBAction)touchCardButton:(UIButton *)sender {
     
+    
     if ([sender.currentTitle length]) {
         [sender setBackgroundImage:[UIImage imageNamed:@"cardBack"]
                           forState:UIControlStateNormal];
-        
         [sender setTitle:@"" forState:UIControlStateNormal];
+        self.flipCount += 1;
         
     } else {
-        [sender setBackgroundImage:[UIImage imageNamed:@"cardFront"] forState:UIControlStateNormal];
-        [sender setTitle:@"A♣️" forState:UIControlStateNormal];
+        Card *card = [self.playingCardDeck drawRandomCard];
+        if (card) {
+            [sender setBackgroundImage:[UIImage imageNamed:@"cardFront"] forState:UIControlStateNormal];
+            [sender setTitle:card.contents forState:UIControlStateNormal];
+            self.flipCount += 1;
+        }
     }
-    
-    self.flipCount += 1;
-     
+}
+
+- (NSString *)titleForCard:(Card *)card {
+    return @"";
 }
 
 @end

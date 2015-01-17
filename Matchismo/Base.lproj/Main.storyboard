@@ -18,7 +18,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qgc-DX-xFR">
                                 <rect key="frame" x="139" y="262" width="96" height="144"/>
-                                <state key="normal" title="A♣️" backgroundImage="cardFront">
+                                <state key="normal" backgroundImage="cardBack">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -45,6 +45,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cardFront" width="64" height="96"/>
+        <image name="cardBack" width="64" height="96"/>
     </resources>
 </document>

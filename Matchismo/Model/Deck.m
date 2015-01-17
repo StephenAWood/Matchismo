@@ -31,8 +31,6 @@
     } else {
         [self.cards addObject:card];
     }
-    
-    
 }
 
 - (void)addCard:(Card *)card
