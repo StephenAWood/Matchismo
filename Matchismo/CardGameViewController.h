@@ -10,6 +10,5 @@
 
 @interface CardGameViewController : UIViewController
 
-
 @end
 

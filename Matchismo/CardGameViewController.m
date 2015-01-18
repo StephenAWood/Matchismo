@@ -20,9 +20,7 @@
 
 - (Deck *)deck
 {
-    if (!_deck) {
-        _deck = [self createDeck];
-    }
+    if (!_deck) _deck = [self createDeck];
     return _deck;
 }
 
@@ -37,14 +35,11 @@
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender {
-    
-    
     if ([sender.currentTitle length]) {
         [sender setBackgroundImage:[UIImage imageNamed:@"cardBack"]
                           forState:UIControlStateNormal];
         [sender setTitle:@"" forState:UIControlStateNormal];
         self.flipCount += 1;
-        
     } else {
         Card *card = [self.deck drawRandomCard];
         if (card) {
