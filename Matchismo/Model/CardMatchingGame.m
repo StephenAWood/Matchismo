@@ -44,7 +44,8 @@
     return (index < [self.cards count]) ? self.cards[index] : nil;
 }
 
-static const int MISMATCH_PENALTY = 2;
+//static const int MISMATCH_PENALTY = 2;
+#define MISMATCH_PENALTY 2
 static const int MATCH_BONUS = 4;
 static const int COST_TO_CHOOSE = 1;
 
@@ -63,7 +64,7 @@ static const int COST_TO_CHOOSE = 1;
                     
                     if (matchScore) {
                         self.score += matchScore * MATCH_BONUS;
-                        otherCard.matched = YES;
+                        otherCard.matched = YES; // set bool to yes
                         card.matched = YES;
                     } else {
                         self.score -= MISMATCH_PENALTY;
