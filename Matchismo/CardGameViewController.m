@@ -32,6 +32,17 @@
     return [[PlayingCardDeck alloc] init];
 }
 
+
+- (IBAction)redealButtonPressed:(UIButton *)sender {
+    [self redeal];
+}
+
+- (void)redeal {
+    self.game = nil;
+    [self updateUI];
+}
+
+
 - (void)updateUI {
     
     for (UIButton *cardButton in self.cardButtons) {
