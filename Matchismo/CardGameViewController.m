@@ -15,6 +15,7 @@
 @property (nonatomic, strong) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *modeSelector;
 
 @end
 
@@ -24,12 +25,17 @@
     if (!_game) {
         _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
                                                   usingDeck:[self createDeck]];
+        [self changeModeSelector:self.modeSelector];
     }
     return _game;
 }
 
 - (Deck *)createDeck {
     return [[PlayingCardDeck alloc] init];
+}
+
+- (IBAction)changeModeSelector:(UISegmentedControl *)sender {
+    self.game.matchNumber = [[sender titleForSegmentAtIndex:sender.selectedSegmentIndex] integerValue];
 }
 
 #define REDEAL_MESSAGE @"Are you sure you want to redeal?"

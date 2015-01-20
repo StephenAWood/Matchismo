@@ -20,15 +20,23 @@
 - (int)match:(NSArray *)otherCards {
     int score = 0;
     
-    if ([otherCards count] == 1) {
-        PlayingCard *otherCard = [otherCards firstObject];
-        if (otherCard.rank == self.rank) {
-            score = 4;
-        } else if ([otherCard.suit isEqualToString:self.suit]) {
-            score = 1;
+    if ([otherCards count]) {
+        
+        for (Card *card in otherCards) {
+            if ([card isKindOfClass:[PlayingCard class]]) {
+                PlayingCard *otherCard = (PlayingCard *)card;
+                if (otherCard.rank == self.rank) {
+                    score += 4;
+                } else if ([otherCard.suit isEqualToString:self.suit]) {
+                    score += 1;
+                }
+            }
         }
     }
     
+    if ([otherCards count] > 1) {
+        score += [[otherCards firstObject] match:[otherCards subarrayWithRange:NSMakeRange(1, [otherCards count] - 1)]];
+    }
     return score;
 }
 
