@@ -16,6 +16,8 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *modeSelector;
+@property (nonatomic) int lastScore;
+@property (weak, nonatomic) IBOutlet UILabel *matchingLabel;
 
 @end
 
@@ -60,10 +62,33 @@
 
 
 - (void)updateUI {
-    
     for (UIButton *cardButton in self.cardButtons) {
         NSUInteger cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
         Card *card = [self.game cardAtIndex:cardButtonIndex];
+        
+        BOOL animate = YES;
+        if (animate) {
+            if (card.isChosen && !card.isMatched) {
+                [UIView animateWithDuration:0.5
+                                      delay:0.0
+                                    options:UIViewAnimationOptionBeginFromCurrentState
+                                 animations:^{
+                                     [UIView transitionWithView:cardButton
+                                                       duration:0.5
+                                                        options:UIViewAnimationOptionTransitionFlipFromLeft
+                                                     animations:nil
+                                                     completion:nil];
+                                 }
+                                 completion:nil];
+            }
+            
+//            if (card.isChosen && !card.isMatched ) {
+//                <#statements#>
+//            }
+        }
+        
+        
+        
         [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[self backgroundImageForCard:card] forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
