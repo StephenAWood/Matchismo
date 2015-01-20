@@ -32,9 +32,18 @@
     return [[PlayingCardDeck alloc] init];
 }
 
+#define REDEAL_MESSAGE @"Are you sure you want to redeal?"
 
 - (IBAction)redealButtonPressed:(UIButton *)sender {
-    [self redeal];
+    // Ask the user if they are sure they want to redeal.
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Redeal?" message:REDEAL_MESSAGE preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *redeal = [UIAlertAction actionWithTitle:@"Redeal" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self redeal];
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:cancel];
+    [alert addAction:redeal];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)redeal {
