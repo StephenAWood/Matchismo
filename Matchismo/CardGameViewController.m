@@ -54,6 +54,7 @@
 
 - (void)redeal {
     self.game = nil;
+    self.modeSelector.enabled = YES;
     [self updateUI];
 }
 
@@ -73,6 +74,7 @@
 - (IBAction)touchCardButton:(UIButton *)sender {
     NSUInteger chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:chosenButtonIndex];
+    self.modeSelector.enabled = NO;
     [self updateUI];
 }
 
