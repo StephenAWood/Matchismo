@@ -21,5 +21,6 @@
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic, readonly) NSInteger lastScore;
 @property (nonatomic) NSUInteger matchNumber;
+@property (nonatomic, readonly) NSArray *lastChosenCards;
 
 @end

@@ -16,7 +16,6 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *modeSelector;
-@property (nonatomic) int lastScore;
 @property (weak, nonatomic) IBOutlet UILabel *matchingLabel;
 
 @end
@@ -68,8 +67,38 @@
         [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[self backgroundImageForCard:card] forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
-        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
     }
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
+    [self updateMatchDescriptionLabel];
+}
+
+- (void)updateMatchDescriptionLabel {
+    
+    NSString *text = @"";
+    
+    if (self.game) {
+        NSMutableArray *contents = [[NSMutableArray alloc] init];
+        
+        
+        for (id card in self.game.lastChosenCards) {
+            if ([card isKindOfClass:[PlayingCard class]]) {
+                PlayingCard *pc = (PlayingCard *)card;
+                [contents addObject:pc.contents];
+            }
+        }
+        
+        if (self.game.lastScore < 0) {
+            text = [contents componentsJoinedByString:@" "];
+            text = [text stringByAppendingFormat:@" Don't match! %ld point penalty!", (long)self.game.lastScore];
+        } else if (self.game.lastScore > 0) {
+            text = [contents componentsJoinedByString:@" "];
+            text = [@"Matched" stringByAppendingFormat:@" %@ for %ld points.", text, (long)self.game.lastScore];
+        } else {
+            text = [contents componentsJoinedByString:@" "];
+        }
+    }
+    
+    self.matchingLabel.text = text;
 }
 
 - (IBAction)touchCardButton:(UIButton *)sender {
