@@ -79,17 +79,18 @@
     if (self.game) {
         NSMutableArray *contents = [[NSMutableArray alloc] init];
         
-        
-        for (id card in self.game.lastChosenCards) {
-            if ([card isKindOfClass:[PlayingCard class]]) {
-                PlayingCard *pc = (PlayingCard *)card;
-                [contents addObject:pc.contents];
+        if ([self.game.lastChosenCards count]) {
+            for (id card in self.game.lastChosenCards) {
+                if ([card isKindOfClass:[PlayingCard class]]) {
+                    PlayingCard *pc = (PlayingCard *)card;
+                    [contents addObject:pc.contents];
+                }
             }
         }
         
         if (self.game.lastScore < 0) {
             text = [contents componentsJoinedByString:@" "];
-            text = [text stringByAppendingFormat:@" Don't match! %ld point penalty!", (long)self.game.lastScore];
+            text = [text stringByAppendingFormat:@" Don't match! %ld point penalty!", -(long)self.game.lastScore];
         } else if (self.game.lastScore > 0) {
             text = [contents componentsJoinedByString:@" "];
             text = [@"Matched" stringByAppendingFormat:@" %@ for %ld points.", text, (long)self.game.lastScore];
