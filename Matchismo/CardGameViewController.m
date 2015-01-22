@@ -87,7 +87,6 @@
                 }
             }
         }
-        
         if (self.game.lastScore < 0) {
             text = [contents componentsJoinedByString:@" "];
             text = [text stringByAppendingFormat:@" Don't match! %ld point penalty!", -(long)self.game.lastScore];
@@ -98,7 +97,6 @@
             text = [contents componentsJoinedByString:@" "];
         }
     }
-    
     self.matchingLabel.text = text;
 }
 
