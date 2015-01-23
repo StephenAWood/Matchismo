@@ -7,8 +7,6 @@
 //
 
 #import "CardGameViewController.h"
-#import "PlayingCardDeck.h"
-#import "PlayingCard.h"
 #import "CardMatchingGame.h"
 
 @interface CardGameViewController ()
@@ -17,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *modeSelector;
 @property (weak, nonatomic) IBOutlet UILabel *matchingLabel;
-
 @end
 
 @implementation CardGameViewController
@@ -31,8 +28,8 @@
     return _game;
 }
 
-- (Deck *)createDeck {
-    return [[PlayingCardDeck alloc] init];
+- (Deck *)createDeck { //abstract
+    return nil;
 }
 
 - (IBAction)changeModeSelector:(UISegmentedControl *)sender {
@@ -40,6 +37,7 @@
 }
 
 #define REDEAL_MESSAGE @"Are you sure you want to redeal?"
+
 
 - (IBAction)redealButtonPressed:(UIButton *)sender {
     // Ask the user if they are sure they want to redeal.
@@ -64,7 +62,7 @@
     for (UIButton *cardButton in self.cardButtons) {
         NSUInteger cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
         Card *card = [self.game cardAtIndex:cardButtonIndex];
-        [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
+        [cardButton setAttributedTitle:[self titleForCard:card] forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[self backgroundImageForCard:card] forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
     }
@@ -81,8 +79,8 @@
         
         if ([self.game.lastChosenCards count]) {
             for (id card in self.game.lastChosenCards) {
-                if ([card isKindOfClass:[PlayingCard class]]) {
-                    PlayingCard *pc = (PlayingCard *)card;
+                if ([card isKindOfClass:[Card class]]) {
+                    Card *pc = (Card *)card;
                     [contents addObject:pc.contents];
                 }
             }
@@ -107,8 +105,10 @@
     [self updateUI];
 }
 
-- (NSString *)titleForCard:(Card *)card {
-    return card.isChosen ? card.contents : @"" ;
+- (NSAttributedString *)titleForCard:(Card *)card {
+//    return card.isChosen ? card.contents : @"" ;
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:card.chosen ? card.contents : @""];
+    return title;
 }
 
 - (UIImage *)backgroundImageForCard:(Card *)card {

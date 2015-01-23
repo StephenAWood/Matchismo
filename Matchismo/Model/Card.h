@@ -17,4 +17,6 @@
 
 - (int)match:(NSArray *)otherCards;
 
+@property (nonatomic) NSUInteger numberOfMatchingCards;
+
 @end

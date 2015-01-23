@@ -26,7 +26,8 @@
 }
 
 - (NSUInteger)matchNumber {
-    if (_matchNumber < 2) _matchNumber = 2;
+    Card *card = [self.cards firstObject];
+    if (_matchNumber < card.numberOfMatchingCards) _matchNumber = card.numberOfMatchingCards;
     return _matchNumber;
 }
 
