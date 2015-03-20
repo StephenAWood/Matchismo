@@ -16,7 +16,7 @@
 // for subclasses
 - (Deck *)createDeck; // Abstract Method
 
-
+@property (weak, nonatomic) IBOutlet UILabel *matchingLabel;
 - (void)updateUI;
 - (UIImage *)backgroundImageForCard:(Card *)card;
 - (NSAttributedString *)titleForCard:(Card *)card;

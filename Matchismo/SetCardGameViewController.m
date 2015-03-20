@@ -21,6 +21,14 @@
     return [[SetCardDeck alloc] init];
 }
 
+- (void) updateUI {
+    [super updateUI];
+    
+    NSMutableAttributedString *description = [self.matchingLabel.attributedText mutableCopy];
+    
+    NSArray *setCards = [SetCard cards]
+}
+
 - (NSAttributedString *)titleForCard:(Card *)card {
     NSString *symbol = @"?";
     NSMutableDictionary *attributes = [[NSMutableDictionary alloc] init];
@@ -66,6 +74,7 @@
 - (UIImage *)backgroundImageForCard:(Card *)card {
     return [UIImage imageNamed:card.chosen ? @"setCardSelected" : @"setCard"];
 }
+
 
 /*
 #pragma mark - Navigation
